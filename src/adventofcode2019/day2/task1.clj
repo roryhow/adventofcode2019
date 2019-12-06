@@ -2,11 +2,11 @@
   (:require [clojure.string :as str]))
 
 (def OPCODE-LIST-STEP 4)
-(def opcodes (-> (slurp "src/adventofcode2019/day2/input.txt")
-                 str/trim-newline
-                 (str/split #",")
-                 vec-parse-int
-                 (assoc 1 12 2 2)))
+(defn opcodes [noun verb] (-> (slurp "src/adventofcode2019/day2/input.txt")
+                              str/trim-newline
+                              (str/split #",")
+                              vec-parse-int
+                              (assoc 1 noun 2 verb)))
 
 (defn intcode-program [opcodes]
   (loop [codes opcodes
@@ -21,4 +21,4 @@
   (vec (map #(Integer/parseInt %) list)))
 
 (defn task1 []
-  (nth (intcode-program opcodes) 0))
+  (nth (intcode-program (opcodes 12 2)) 0))
